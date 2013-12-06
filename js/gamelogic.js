@@ -81,17 +81,7 @@
 			  ()
 			);
     };
-	//sets up the Lander layout
-	function Lander () {
-		  this.x = 0;
-		  this.y = 0;
-		  this.width = 22;
-		  this.height = 25;
-		  this.rotation = 0;
-		  this.mainThruster = false;
-		  this.leftThruster = false;
-		  this.rightThruster = false;		  
-	}
+
 	//sets up the Target for the Lander to shoot for
 	function LandingPad () {
 		  this.x = 0;
@@ -113,6 +103,18 @@
 		  context.lineTo(4, 5);
 		  context.stroke();
 		  context.restore();
+	}
+	
+	//sets up the Lander layout box
+	function Lander () {
+		  this.x = 0;
+		  this.y = 0;
+		  this.width = 22;
+		  this.height = 25;
+		  this.rotation = 0;
+		  this.mainThruster = false;
+		  this.leftThruster = false;
+		  this.rightThruster = false;		  
 	}
 	
 	//this key piece of code then moves the lander as read by the key input or lets gravity take effect
