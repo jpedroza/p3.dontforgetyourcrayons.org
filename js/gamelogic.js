@@ -7,11 +7,17 @@
 			  var velocityInTheXDirection = 0; 
 			  var velocityInTheYDirection = 0; 
 			  var thrust = 0;
+			  var landingpad = new LandingPad();
 	//Lander starting conditions
+			  landingpad.x = 760;
+			  landingpad.y = 50;
 			  lander.x = canvas.width / 2;
 			  lander.y = canvas.height / 2;
 			  lander.rotation = 0;
 			  var gravity = 0.01;
+	//I will add an element to the canvas
+		//	  context.fillStyle = "#FFFF00";//yellow 
+		//	  canvas.fillRect(760, 50, 40, 10);//canvas is 800px across by 570px down
 	//This sets up to read for arrow key presses so it can react to input
 			  window.addEventListener('keydown', 
 									  function (event) {
@@ -38,7 +44,7 @@
 									  function () {
 											rotate = 0;
 											thrust = 0;
-											gravity = 0.01;//this was a manual experiment and play until this seemed to be reasonable
+											gravity = 0.01;//this was a manual experiment and play until this seemed to be reasonable; however, on different computers and browsers it moves faster or slower
 											lander.mainThruster = false;
 											lander.rightThruster = false;
 											lander.leftThruster = false;
@@ -86,13 +92,36 @@
 		  this.leftThruster = false;
 		  this.rightThruster = false;		  
 	}
+	//sets up the Target for the Lander to shoot for
+	function LandingPad () {
+		  this.x = 0;
+		  this.y = 0;
+		  this.width = 40;
+		  this.height = 10;
+	}
+	
+	//this draws out the landing pad
+	LandingPad.prototype.draw = function (context) {
+		  context.save();
+		  context.lineWidth = 1;
+		  context.strokeStyle = "#ffffff"; //white
+		  context.beginPath();
+		  context.moveTo(4, 5);
+		  context.lineTo(4, 8);
+		  context.lineTo(20, 8);
+		  context.lineTo(20, 5);
+		  context.lineTo(4, 5);
+		  context.stroke();
+		  context.restore();
+	}
+	
 	//this key piece of code then moves the lander as read by the key input or lets gravity take effect
 	Lander.prototype.draw = function (context) {
 		  context.save();
 		  context.translate(this.x, this.y);
 		  context.rotate(this.rotation);
 		  context.lineWidth = 1;
-		  context.strokeStyle = "#ffffff";
+		  context.strokeStyle = "#ffffff"; //white
 		  
 		  //upper capsule of the lander
 		  context.beginPath();
