@@ -1,0 +1,4 @@
+#canvas {
+		background-image:url('../images/space2.png');/*this was the best background so I mcould just focus on getting the mechanics of motion down*/
+		background-repeat:  no-repeat; /*I adjusted the size of the image with manual approximation to maximize the black for the purpose of contrast*/ 
+      }
