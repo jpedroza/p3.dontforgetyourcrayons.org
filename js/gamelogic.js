@@ -77,6 +77,7 @@
 				lander.x += velocityInTheXDirection;
 				lander.y += velocityInTheYDirection;
 				lander.draw(context);
+				landingpad.draw(context);
 			  }
 			  ()
 			);
