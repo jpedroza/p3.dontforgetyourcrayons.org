@@ -16,12 +16,10 @@ p {
 }
 
 body {
-	width = 800px;
 	text-align: center;
 }
 
 #summary {
-	width = 800px;
 	text-align: center;
 	margin-left: 400px;
 	margin-right: 400px;
