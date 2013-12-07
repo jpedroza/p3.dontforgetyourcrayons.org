@@ -9,15 +9,11 @@
 			  var thrust = 0;
 			  var landingpad = new LandingPad();
 	//Lander starting conditions
-			  //landingpad.x = 760;
-			  //landingpad.y = 50;
 			  lander.x = canvas.width / 2;
 			  lander.y = canvas.height / 2;
 			  lander.rotation = 0;
 			  var gravity = 0.01;
-	//I will add an element to the canvas
-		//	  context.fillStyle = "#FFFF00";//yellow 
-		//	  canvas.fillRect(760, 50, 40, 10);//canvas is 800px across by 570px down
+
 	//This sets up to read for arrow key presses so it can react to input
 			  window.addEventListener('keydown', 
 									  function (event) {
@@ -72,20 +68,12 @@
 				var angle = lander.rotation; 
 				var accelerationInTheYDirection = -Math.cos(angle) * thrust;//this is negative to account for the orientation of the canvas 
 				var accelerationInTheXDirection = Math.sin(angle) * thrust;
-				//$('#canvas').prepend("<p>Love</p>");
 				velocityInTheXDirection += accelerationInTheXDirection;
 				velocityInTheYDirection = velocityInTheYDirection + accelerationInTheYDirection + gravity;
 				lander.x += velocityInTheXDirection;
 				lander.y += velocityInTheYDirection;
-				document.getElementById('dashboard').innerHTML = lander.y;
-				//if (lander.y == 460) {
-					//console.log("boom");
-					//alert("boom");
-					//break justKeepGoing;
-				//}
-				//justKeepGoing:
-				//landingpad.x = 760;
-				//landingpad.y = 50;
+				document.getElementById('yposition').innerHTML = lander.y;
+				document.getElementById('xposition').innerHTML = lander.x;				
 				lander.draw(context);
 				landingpad.draw(context);
 			  }
@@ -93,10 +81,8 @@
 			);
     };
 
-	//sets up the Target for the Lander to shoot for
+	//sets up more scenery
 	function LandingPad () {
-		  //this.x = 760;
-		  //this.y = 50;
 		  this.width = 40;
 		  this.height = 10;
 	}

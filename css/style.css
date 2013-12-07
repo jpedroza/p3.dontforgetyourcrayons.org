@@ -2,3 +2,27 @@
 		background-image:url('../images/space2.png');/*this was the best background so I could just focus on getting the mechanics of motion down*/
 		background-repeat:no-repeat; /*I adjusted the size of the image with manual approximation to maximize the black for the purpose of contrast*/ 
       }
+	  
+#xposition {
+	font-size: 16px;
+}
+
+#yposition {
+	font-size: 16px;
+}
+
+p {
+	font-size: 16px;
+}
+
+body {
+	width = 800px;
+	text-align: center;
+}
+
+#summary {
+	width = 800px;
+	text-align: center;
+	margin-left: 400px;
+	margin-right: 400px;
+}
