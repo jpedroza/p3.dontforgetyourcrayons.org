@@ -9,8 +9,8 @@
 			  var thrust = 0;
 			  var landingpad = new LandingPad();
 	//Lander starting conditions
-			  landingpad.x = 760;
-			  landingpad.y = 50;
+			  //landingpad.x = 760;
+			  //landingpad.y = 50;
 			  lander.x = canvas.width / 2;
 			  lander.y = canvas.height / 2;
 			  lander.rotation = 0;
@@ -76,6 +76,8 @@
 				velocityInTheYDirection = velocityInTheYDirection + accelerationInTheYDirection + gravity;
 				lander.x += velocityInTheXDirection;
 				lander.y += velocityInTheYDirection;
+				//landingpad.x = 760;
+				//landingpad.y = 50;
 				lander.draw(context);
 				landingpad.draw(context);
 			  }
@@ -85,8 +87,8 @@
 
 	//sets up the Target for the Lander to shoot for
 	function LandingPad () {
-		  this.x = 0;
-		  this.y = 0;
+		  //this.x = 760;
+		  //this.y = 50;
 		  this.width = 40;
 		  this.height = 10;
 	}
@@ -97,11 +99,13 @@
 		  context.lineWidth = 1;
 		  context.strokeStyle = "#ffffff"; //white
 		  context.beginPath();
-		  context.moveTo(4, 5);
-		  context.lineTo(4, 8);
-		  context.lineTo(20, 8);
-		  context.lineTo(20, 5);
-		  context.lineTo(4, 5);
+		  context.moveTo(500, 300);
+		  context.lineTo(550, 240);
+		  context.lineTo(600, 290);
+		  context.lineTo(670, 290);
+		  context.lineTo(720, 180);
+		  context.lineTo(790, 300);		  
+		  context.lineTo(500, 300);
 		  context.stroke();
 		  context.restore();
 	}
