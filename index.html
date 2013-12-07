@@ -1,14 +1,36 @@
 <!doctype html>
 <html>
   <head>
-    <title>Shooting For The Stars</title>
+	<meta charset='UTF-8'>
+    <title>Lander Simulator</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+
   </head>
   <body>
-    <h1>Shooting For The Stars</h1>
+    <h1>Lander Simulator</h1>
+	<div id="xposition">
+	</div>
+	<div id="yposition">
+	</div>
+	<div id="vacceleration">
+	</div>
+	<div id="hacceleration">
+	</div>
+	<div id="vvelocity">
+	</div>
+	<div id="hvelocity">
+	</div>
+	<div id="angle">
+	</div>
+	
     <canvas id="canvas" width="800" height="570"></canvas><!-- this size by experimentation just seems to fit my original image okay -->
-    <h3>Use the Left and Right Arrow keys to fire side thrusters to rotate the Lander</h3>
+    <p>
+	This project is the first phase of the Army's "Partners in Education" effort to lend a helping hand in developing the Future Leaders.  
+	Soldiers and Civilians from the Brigade Modernization Command in Fort Bliss, Texas have joined forces to put together some "Cool" ways to help Morehead Middle School students learn about the importance of math.
+	This simulator is one of many proposed projects that are focused on providing a deeper appreciation for Sine, Cosine, Tangent, Velocity, Acceleration, and Gravity, etc. 
+	</p>
+	<h3>Use the Left and Right Arrow keys to fire side thrusters to rotate the Lander</h3>
 	<h3>Press Up Arrow key to fire the Main Lander Thrusters</h3>
-<script src="js/gamelogic.js"></script>
+<script type="text/javascript" src="js/gamelogic.js"></script>
   </body>
 </html>

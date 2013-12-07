@@ -72,10 +72,18 @@
 				var angle = lander.rotation; 
 				var accelerationInTheYDirection = -Math.cos(angle) * thrust;//this is negative to account for the orientation of the canvas 
 				var accelerationInTheXDirection = Math.sin(angle) * thrust;
+				//$('#canvas').prepend("<p>Love</p>");
 				velocityInTheXDirection += accelerationInTheXDirection;
 				velocityInTheYDirection = velocityInTheYDirection + accelerationInTheYDirection + gravity;
 				lander.x += velocityInTheXDirection;
 				lander.y += velocityInTheYDirection;
+				document.getElementById('dashboard').innerHTML = lander.y;
+				//if (lander.y == 460) {
+					//console.log("boom");
+					//alert("boom");
+					//break justKeepGoing;
+				//}
+				//justKeepGoing:
 				//landingpad.x = 760;
 				//landingpad.y = 50;
 				lander.draw(context);
