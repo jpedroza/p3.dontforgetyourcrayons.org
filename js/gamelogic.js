@@ -8,25 +8,32 @@
 			  var velocityInTheYDirection = 0; 
 			  var thrust = 0;
 			  var landingpad = new LandingPad();
+			  var arrow = new Arrow();
+	//Gamespace Boundaries
+			var leftBoundary = 0;
+			var rightBoundary = canvas.width;
+			var topBoundary = 0;
+			var bottomBoundary = canvas.height;
 	//Lander starting conditions
 			  lander.x = canvas.width / 2;
 			  lander.y = canvas.height / 2;
 			  lander.rotation = 0;
-			  var gravity = 0.01;
+			  var gravity = 0.02;//adjusted by visual inspection
+			  var elasticity = -.5;//this value seems to give just enough bounce to seem reasonable
 
 	//This sets up to read for arrow key presses so it can react to input
 			  window.addEventListener('keydown', 
 									  function (event) {
 											switch (event.keyCode) {
-												case 37:      //rotate left
+												case 37://rotate left
 													rotate = -1;
 													lander.rightThruster = true;													
 													break;
-												case 39:      //rotate right
+												case 39://rotate right
 													rotate = 1;
 													lander.leftThruster = true;
 													break;
-												case 38:      //thrust up
+												case 38://thrust up
 													thrust = 0.05;
 													gravity = -0.01;//this slowly couteract the effects of gravity 
 													lander.mainThruster = true;
@@ -68,19 +75,69 @@
 				var angle = lander.rotation; 
 				var accelerationInTheYDirection = -Math.cos(angle) * thrust;//this is negative to account for the orientation of the canvas 
 				var accelerationInTheXDirection = Math.sin(angle) * thrust;
+				
+				//make the lander bounce off the left and right limits of the walls
+				if (lander.x + lander.landerCollisionWidth > rightBoundary) {
+					lander.x = rightBoundary - lander.landerCollisionWidth;           
+					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+					
+				} else if (lander.x - lander.landerCollisionWidth < leftBoundary) {
+					lander.x = leftBoundary + lander.landerCollisionWidth;
+					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				}
+				
+				//make the lander bounce off the upper and lower limits of the walls
+				if (lander.y + lander.landerCollisionHeight > bottomBoundary) {
+					lander.y = bottomBoundary - lander.landerCollisionHeight;
+					velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				} else if (lander.y - lander.landerCollisionHeight < topBoundary) {
+					lander.y = topBoundary + lander.landerCollisionHeight;
+					velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				} 
+				
 				velocityInTheXDirection += accelerationInTheXDirection;
 				velocityInTheYDirection = velocityInTheYDirection + accelerationInTheYDirection + gravity;
 				lander.x += velocityInTheXDirection;
 				lander.y += velocityInTheYDirection;
-				document.getElementById('yposition').innerHTML = lander.y;
-				document.getElementById('xposition').innerHTML = lander.x;				
+				document.getElementById('yposition').innerHTML = "Y Position: " + lander.y.toFixed(2);//lander.y;
+				document.getElementById('xposition').innerHTML = "X Position: " + lander.x.toFixed(2);	
+				document.getElementById('vacceleration').innerHTML = "Y Acceleration: " + accelerationInTheYDirection.toFixed(2);
+				document.getElementById('hacceleration').innerHTML = "X Acceleration: " + accelerationInTheXDirection.toFixed(2);
+				document.getElementById('vvelocity').innerHTML = "Y Velocity: " + velocityInTheYDirection.toFixed(2);
+				document.getElementById('hvelocity').innerHTML = "X Velocity: " + velocityInTheXDirection.toFixed(2);
+				document.getElementById('angle').innerHTML = "Angle: " + lander.rotation.toFixed(2);
 				lander.draw(context);
 				landingpad.draw(context);
+				arrow.draw(context);
 			  }
 			  ()
 			);
     };
-
+	
+	//azimuth guage
+	function Arrow () {
+		  this.width = 30;
+		  this.height = 150;
+	}
+	
+	//azimuth guage
+	Arrow.prototype.draw = function (context) {
+		  context.save();
+		  context.lineWidth = 1;
+		  context.strokeStyle = "#ffffff"; //white
+		  context.beginPath();
+		  context.moveTo(0, 40);
+		  context.lineTo(5, 0);
+		  context.lineTo(15, 40);
+		  context.lineTo(10, 40);
+		  context.lineTo(10, 150);
+		  context.lineTo(5, 150);		  
+		  context.lineTo(5, 40);
+		  context.lineTo(0, 40);
+		  context.stroke();
+		  context.restore();
+	}
+	
 	//sets up more scenery
 	function LandingPad () {
 		  this.width = 40;
@@ -110,6 +167,8 @@
 		  this.y = 0;
 		  this.width = 22;
 		  this.height = 25;
+		  this.landerCollisionWidth = 10;
+		  this.landerCollisionHeight = 14;
 		  this.rotation = 0;
 		  this.mainThruster = false;
 		  this.leftThruster = false;
