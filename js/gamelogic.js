@@ -14,6 +14,8 @@
 			var rightBoundary = canvas.width;
 			var topBoundary = 0;
 			var bottomBoundary = canvas.height;
+	//landingPad Boundaries
+			
 	//Lander starting conditions
 			  lander.x = canvas.width / 2;
 			  lander.y = canvas.height / 2;
@@ -75,7 +77,8 @@
 				var angle = lander.rotation; 
 				var accelerationInTheYDirection = -Math.cos(angle) * thrust;//this is negative to account for the orientation of the canvas 
 				var accelerationInTheXDirection = Math.sin(angle) * thrust;
-				
+	
+	//The ability to block in the screen canvas so that the lander just bounces off the walls follows:	
 				//make the lander bounce off the left and right limits of the walls
 				if (lander.x + lander.landerCollisionWidth > rightBoundary) {
 					lander.x = rightBoundary - lander.landerCollisionWidth;           
@@ -94,12 +97,39 @@
 					lander.y = topBoundary + lander.landerCollisionHeight;
 					velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
 				} 
+	//The end of the blocking logic
+	
+		//The landingPad logic follows:	
+				//make the lander bounce off the left and right limits of the walls
+				/*if (lander.x + lander.landerCollisionWidth > rightBoundary) {
+					lander.x = rightBoundary - lander.landerCollisionWidth;           
+					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+					
+				} else if (lander.x - lander.landerCollisionWidth < leftBoundary) {
+					lander.x = leftBoundary + lander.landerCollisionWidth;
+					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				}*/
 				
+				//make the lander bounce off the upper and lower limits of the walls
+				if  ((lander.x >= 580 && lander.x <= 680) && (lander.y + lander.landerCollisionHeight > 290)) {
+		//			window.alert("hey");
+					lander.y = 290 - lander.landerCollisionHeight;
+					velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				};
+
+				//else if (lander.y - lander.landerCollisionHeight < topBoundary) {
+				//	lander.y = topBoundary + lander.landerCollisionHeight;
+				//	velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				//} 
+	//The end of the landingPad logic
+
+	
+	//The dynamics of the lander follow: velocity, angle, acceleration, and gravity
 				velocityInTheXDirection += accelerationInTheXDirection;
 				velocityInTheYDirection = velocityInTheYDirection + accelerationInTheYDirection + gravity;
 				lander.x += velocityInTheXDirection;
 				lander.y += velocityInTheYDirection;
-				document.getElementById('yposition').innerHTML = "Y Position: " + lander.y.toFixed(2);//lander.y;
+				document.getElementById('yposition').innerHTML = "Y Position: " + lander.y.toFixed(2);
 				document.getElementById('xposition').innerHTML = "X Position: " + lander.x.toFixed(2);	
 				document.getElementById('vacceleration').innerHTML = "Y Acceleration: " + accelerationInTheYDirection.toFixed(2);
 				document.getElementById('hacceleration').innerHTML = "X Acceleration: " + accelerationInTheXDirection.toFixed(2);
@@ -108,7 +138,7 @@
 				document.getElementById('angle').innerHTML = "Angle: " + lander.rotation.toFixed(2);
 				lander.draw(context);
 				landingpad.draw(context);
-				arrow.draw(context);
+				//arrow.draw(context);
 			  }
 			  ()
 			);
