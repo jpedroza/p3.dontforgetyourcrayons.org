@@ -1,0 +1,62 @@
+	//The end of the blocking logic
+	
+		//The landingPad logic follows:	
+				//make the lander bounce off the left and right limits of the walls
+				/*if (lander.x + lander.landerCollisionWidth > rightBoundary) {
+					lander.x = rightBoundary - lander.landerCollisionWidth;           
+					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+					
+				} else if (lander.x - lander.landerCollisionWidth < leftBoundary) {
+					lander.x = leftBoundary + lander.landerCollisionWidth;
+					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				}*/
+				
+				//make the lander bounce off the upper and lower limits of the walls---------------------------------------------------------------------------------------
+				if  (lander.y == 290) {//+ lander.landerCollisionHeight ((lander.x >= 580 && lander.x <= 680) && (lander.y == 280))
+					console.log("landing logic");
+					windows.alert("okay 290");
+					//lander.y = lander.landerCollisionHeight;-------------------------------------------------------------------------------------------------------
+					velocityInTheYDirection *= -1;//elasticity;//to just bounce off multiply times -1 to change the direction;------------------------------------------------
+					//add friction to the right
+					/*if (velocityInTheXDirection > 0) {
+						velocityInTheXDirection -= frictionCoefficient;
+					} else if (velocityInTheXDirection < 0) {
+						velocityInTheXDirection += frictionCoefficient;
+					} else {
+						velocityInTheXDirection = 0;
+					}*/
+				};
+		
+				//else if (lander.y - lander.landerCollisionHeight < topBoundary) {
+				//	lander.y = topBoundary + lander.landerCollisionHeight;
+				//	velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				//} 
+	//The end of the landingPad logic
+	
+	
+	
+	
+	the block for landingPad
+					if (lander.x + lander.landerCollisionWidth > rightBoundary) {
+					lander.x = rightBoundary - lander.landerCollisionWidth;           
+					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				} else if (lander.x - lander.landerCollisionWidth < leftBoundary) {
+					lander.x = leftBoundary + lander.landerCollisionWidth;
+					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				}
+				//make the lander bounce off the upper and lower limits of the walls
+				if (lander.y + lander.landerCollisionHeight > bottomBoundary) {
+					lander.y = bottomBoundary - lander.landerCollisionHeight;
+					velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+					if (velocityInTheXDirection > 0) {
+						velocityInTheXDirection = velocityInTheXDirection.toFixed(1);
+						velocityInTheXDirection -= frictionCoefficient;
+					}
+					if (velocityInTheXDirection < 0) {
+						velocityInTheXDirection += frictionCoefficient;
+					}
+				} else if (lander.y - lander.landerCollisionHeight < topBoundary) {
+					lander.y = topBoundary + lander.landerCollisionHeight;
+					velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				} 
+	

@@ -22,6 +22,9 @@
 			  lander.rotation = 0;
 			  var gravity = 0.02;//adjusted by visual inspection
 			  var elasticity = -.5;//this value seems to give just enough bounce to seem reasonable
+			  var frictionCoefficient = .1;
+	//statusWindow
+			  var statusWindow = document.getElementById('statusWindow');
 
 	//This sets up to read for arrow key presses so it can react to input
 			  window.addEventListener('keydown', 
@@ -83,46 +86,43 @@
 				if (lander.x + lander.landerCollisionWidth > rightBoundary) {
 					lander.x = rightBoundary - lander.landerCollisionWidth;           
 					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
-					
 				} else if (lander.x - lander.landerCollisionWidth < leftBoundary) {
 					lander.x = leftBoundary + lander.landerCollisionWidth;
 					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
 				}
-				
 				//make the lander bounce off the upper and lower limits of the walls
 				if (lander.y + lander.landerCollisionHeight > bottomBoundary) {
 					lander.y = bottomBoundary - lander.landerCollisionHeight;
 					velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+					if (velocityInTheXDirection > 0) {
+						velocityInTheXDirection = velocityInTheXDirection.toFixed(1);
+						velocityInTheXDirection -= frictionCoefficient;
+					}
+					if (velocityInTheXDirection < 0) {
+						velocityInTheXDirection += frictionCoefficient;
+					}
 				} else if (lander.y - lander.landerCollisionHeight < topBoundary) {
 					lander.y = topBoundary + lander.landerCollisionHeight;
 					velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
 				} 
-	//The end of the blocking logic
-	
-		//The landingPad logic follows:	
-				//make the lander bounce off the left and right limits of the walls
-				/*if (lander.x + lander.landerCollisionWidth > rightBoundary) {
-					lander.x = rightBoundary - lander.landerCollisionWidth;           
-					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
+				statusWindow.value = 'xxxxxx';
+	//First landinPad==========================================================================================================================working	
+				if (lander.x > 600 && lander.x < 690 && Math.round(lander.y) == 280) { // || 670 < lander.x || lander.y + lander.height < 290 || 300 < lander.y
+					statusWindow.value = "Bang!";
+					//now working==============================================================================================================working
+					lander.y = 280;//0 - lander.landerCollisionHeight;// at 292 it slips thru
+					velocityInTheYDirection *= elasticity;//-1 seems to work;//elasticity;//to just bounce off multiply times -1 to change the direction;
 					
-				} else if (lander.x - lander.landerCollisionWidth < leftBoundary) {
-					lander.x = leftBoundary + lander.landerCollisionWidth;
-					velocityInTheXDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
-				}*/
-				
-				//make the lander bounce off the upper and lower limits of the walls
-				if  ((lander.x >= 580 && lander.x <= 680) && (lander.y + lander.landerCollisionHeight > 290)) {
-		//			window.alert("hey");
-					lander.y = 290 - lander.landerCollisionHeight;
-					velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
-				};
-
-				//else if (lander.y - lander.landerCollisionHeight < topBoundary) {
-				//	lander.y = topBoundary + lander.landerCollisionHeight;
-				//	velocityInTheYDirection *= elasticity;//to just bounce off multiply times -1 to change the direction;
-				//} 
-	//The end of the landingPad logic
-
+					if (velocityInTheXDirection > 0) {
+						velocityInTheXDirection = velocityInTheXDirection.toFixed(1);
+						velocityInTheXDirection -= frictionCoefficient;
+					}
+					if (velocityInTheXDirection < 0) {
+						velocityInTheXDirection += frictionCoefficient;
+					}
+				} else {
+					statusWindow.value = "-------";
+				}
 	
 	//The dynamics of the lander follow: velocity, angle, acceleration, and gravity
 				velocityInTheXDirection += accelerationInTheXDirection;
@@ -198,7 +198,7 @@
 		  this.width = 22;
 		  this.height = 25;
 		  this.landerCollisionWidth = 10;
-		  this.landerCollisionHeight = 14;
+		  this.landerCollisionHeight = 10;
 		  this.rotation = 0;
 		  this.mainThruster = false;
 		  this.leftThruster = false;
